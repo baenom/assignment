@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 500px;
+            height: 500px;
+            background-color: gold;
+            border-radius: 10%;
+            /* visibility: hidden; */
+            /* display: none */
+            margin: 36%;
+
+        }
+        img{
+            width: 50%;
+            height: 50%;
+            margin: 25%;
+        }
+        #div01{
+            position: absolute;
+            padding: 30px;
+            width: 700px;
+            height: 200px;
+            top: 500px;
+            left: 500px;
+            border: 10px solid red;
+            display: block;
+            background-image: url(../images/dog.jpg);
+            background-size: cover;
+            background-origin: border-box;
+        }
+        body{
+            background-color: aqua;
+            background-image: url(../images/dog.jpg);
+            /* background-repeat: repeat-x; */
+            /* background-position: 100px; */
+            /* background-size: cover; */
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <img src="../images/dog.jpg" alt="개사진">
+    </div>
+    <div id="div01">
+    </div>
+</body>
+</html>

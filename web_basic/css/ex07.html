@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul li{
+            list-style-type: none;
+            float: left;
+            margin-right: 20px;
+        }
+        li:first-child{
+            color: red;
+        }
+        li:last-child{
+            color: blue;
+        }
+        li:nth-child(2n+1){
+            background-color: lightgray;
+        }
+        a:link{
+            color: orange;
+            text-decoration: none;
+        }
+        a:visited{
+            color: orange;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
+        div{
+            clear: both;
+        }
+        h2:first-of-type{
+            background-color: yellow;
+        }
+        h2:last-of-type{
+            background-color: pink;
+        }
+        p::first-line{
+            text-decoration: underline;
+        }
+        p::first-letter{
+            font-size: 4em;
+        }
+        p::selection{
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <ul>
+        <li>one</li>
+        <li><a href="https://naver.com" target="_blank">two</a></li>
+        <li>three</li>
+        <li>four</li>
+        <li>five</li>
+        <li><a href="https://naver.com" target="_blank">six</a></li>
+        <li>seven</li>
+        <li>eight</li>
+        <div>
+            <h1>hello</h1>
+            <h2>hhhhhhh</h2>
+            <h2>hhhhhhh</h2>
+            <h1>hello</h1>
+            <h2>hhhhhhh</h2>
+            <h2>hhhhhhh</h2>
+            <h1>hello</h1>
+            <h2>hhhhhhh</h2>
+            <h2>hhhhhhh</h2>
+        </div>
+        <p>
+            ikbcvjkwbvjksdbvkljsdbj <br>
+            sdkv bjksdvc <br>
+            sdsdjkbciojdbsc
+        </p>
+    </ul>
+</body>
+</html>

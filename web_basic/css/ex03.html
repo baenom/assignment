@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <style>
+        body{
+            font-family: "Nanum Pen Script", cursive;
+            font-size: 100px;
+        }
+        div{
+            position:relative;
+            width: 200px;
+            height: 200px;
+            border-width: 10px;
+            border-color: aqua;
+            
+        }
+        .div01{
+            background-color: red;
+            z-index: 10;
+            text-align: center;
+            left: 100px;
+            
+            border-style: solid;
+            border-radius: 30px;
+        }
+        .div02{
+            position: fixed;
+            background-color: blue;
+            bottom: 100px;
+            right: 100px;
+            border-style: dotted;
+            border-radius: 150px;
+        }
+        /* .div02{
+            width: 300px;
+            height: 300px;
+            top: 100px;
+            left: 100px;
+            background-color: gray;
+        } */
+    </style>
+</head>
+<body>
+    <div class="div01">사각형 1</div>
+    <div class="div02">사각형 2</div>
+    <!-- <div class="div03"><div class="div01">사각형 1</div></div> -->
+</body>
+</html>

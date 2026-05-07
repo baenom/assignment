@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input[type = password]{
+            background-color: yellow;
+        }
+        img{
+            width: 150px;
+            border: 10px solid red;
+        }
+        img[src ^= "../images"]{
+            border-color: yellow;
+        }
+        img[src $= "cat.jpg"]{
+            border-color: blue;
+        }
+        h1 ~ h2{
+            color: red;
+        }
+        h1 + h2{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        아이디: <input type="text"><br>
+        패스워드: <input type="password"><br>
+    </form>
+    <hr>
+    <img src="../images/cat.jpg" alt=""><br>
+    <img src="../images/dog.jpg" alt=""><br>
+    <img src="../html/sun.jpg" alt=""><br>
+    <h2>header-2-1</h2>
+    <h1>header-1-1</h1>
+    <h2>header-2-2</h2>
+    <h2>header-2-3</h2>
+    <h3>header-3-1</h3>
+    <h4>header-4-1</h4>
+    <h2>header-2-4</h2>
+    <h5>header-5-1</h5>
+    <h2>header-2-5</h2>
+</body>
+</html>
