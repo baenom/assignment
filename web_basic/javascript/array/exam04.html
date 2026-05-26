@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let a = 10
+        let b = a 
+        b = b + 200
+        document.write(`a : ${a}<br>`)
+        document.write(`b : ${b}<br>`)
+        let arr = [10,20,30,40,50]
+        // let copy_arr = arr
+
+        let copy_arr = [...arr]//전개 연산자
+
+        // let copy_arr = arr.map((element)=>element)
+
+        // let copy_arr = arr.map(function(element){
+        //     return element
+        // })
+
+        // let copy_arr = []
+        // for(let data of arr){
+        //     copy_arr.push(data)
+        // }
+
+
+
+        copy_arr[2] = 1000
+        
+        document.write(`arr : ${arr}`)
+        document.write(`copy_arr : ${copy_arr}`)
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

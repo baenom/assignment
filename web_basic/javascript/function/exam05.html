@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let sum = function(a = 0,b = 0,c = 0){
+            return a+b+c
+        }
+        let add = function(sum = 0,...args){
+            for(let data of args){
+                sum += data
+            }
+            return sum
+        }
+        let arr = [10,20,30]
+        document.write(`sum : ${sum(10,20,30)}<br>`)
+        document.write(`sum : ${sum(10,20)}<br>`)
+        document.write(`sum : ${sum(...arr)}<br>`)
+        document.write(`add : ${add()}<br>`)
+        document.write(`add : ${add(10,20,30,40)}<br>`)
+        document.write(`add : ${add(10,20,30,40,50)}<br>`)
+        document.write(`add : ${add(...arr)}<br>`)
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
