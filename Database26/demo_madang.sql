@@ -69,3 +69,51 @@ INSERT INTO Imported_Book VALUES(21, 'Zen Golf', 'Pearson', 12000);
 INSERT INTO Imported_Book VALUES(22, 'Soccer Skills', 'Human Kinetics', 15000);
 
 COMMIT;
+
+
+
+CREATE OR REPLACE PROCEDURE insertBook(
+    mybookid IN NUMBER,
+    mybookname IN VARCHAR2,
+    mypublisher IN VARCHAR2,
+    myprice IN NUMBER
+)
+IS
+BEGIN
+    INSERT INTO Book (bookid, bookname, publisher, price) 
+    VALUES (mybookid, mybookname, mypublisher, myprice);
+END;
+/
+
+
+CREATE OR REPLACE PROCEDURE insertBook2(
+    mybookid IN NUMBER,
+    mybookname IN VARCHAR2,
+    mypublisher IN VARCHAR2,
+    myprice IN NUMBER
+)
+IS
+    count_book NUMBER;
+BEGIN
+    SELECT COUNT(*) INTO count_book FROM Book
+    WHERE bookname LIKE mybookname;
+
+    IF count_book != 0 THEN
+        UPDATE Book SET price = myprice
+        WHERE bookname LIKE mybookname;
+    ELSE
+        INSERT INTO Book (bookid, bookname, publisher, price) 
+        VALUES (mybookid, mybookname, mypublisher, myprice);
+    END IF;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE insertBook2
+IS
+    avg_price NUMBER;
+BEGIN
+    SELECT AVG(price) INTO avg_price FROM Book WHERE price IS NOT NULL;
+    DBMS_OUTPUT.PUT_LINE('평균'|| avg_price);
+END;
+/
+
