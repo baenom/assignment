@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+
+</head>
+<body>
+    <h2><em>안녕하세요</em></h2>
+    <h2 id="h01" class="c01">안녕하세요</h2>
+    <h2 id="h02">안녕하세요</h2>
+    <h2>안녕하세요</h2>
+    <figure>
+        <img src="../../images/cat.jpg" alt="">
+    </figure>
+    
+    <button>변경</button>
+    <button onclick="eventClick()">변경1</button>
+    <button onclick="eventClick()">변경2</button>
+    <button onclick="eventClick()">변경3</button>
+    <button onclick="eventClick()">변경4</button>
+
+    <script>
+        function eventClick(){
+
+        }
+        let btn = document.querySelector('button')
+        btn.addEventListener('click',function(){
+            // alert('btn click..')
+            let h2Tags = document.getElementsByTagName('h2')
+            h2Tags[0].innerText = '변경된 데이터...'
+            let h2Tag = document.getElementById('h02')
+            // h2Tag.innerText = '<mark>goodby!!!</mark>'
+            h2Tag.innerHTML = '<mark>goodby!!!</mark>'
+            let imgTag = document.querySelector('img')
+            imgTag.src = '../../images/dog.jpg'
+        })
+        // btn.onclick = function(){
+        //     alert('btn click..')
+        // }
+    </script>
+
+    
+</body>
+</html>
