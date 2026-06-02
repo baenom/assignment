@@ -1,5 +1,5 @@
-from account import Account
-from account_dao import AccountDAO
+from account.account import Account
+from account.account_dao import AccountDAO
 
 class AccountService:
     account_no_seq = 111111
@@ -43,6 +43,17 @@ class AccountService:
         if account.get_owner() != id or account.get_password() != password:
             raise KeyError
         return self.__dao.delete_account(account_no)
+    def admin_delete_account(self,account_no):
+        account = self.__dao.select_account_by_account_no(account_no)
+        if not account:
+            return False
+        return self.__dao.delete_account(account_no)
+    def get_account_balance(self,account_no):
+        account = self.__dao.select_account_by_account_no(account_no)
+        if account:
+            return account.get_balance()
+        return-1
+
 
 
 if __name__ == "__main__":

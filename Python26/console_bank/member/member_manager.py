@@ -1,6 +1,6 @@
-from member import Member
-from member_service import MemberService
-from member_dao import MemberDAO
+from member.member import Member
+from member.member_service import MemberService
+from member.member_dao import MemberDAO
 
 class MemberManager:
     

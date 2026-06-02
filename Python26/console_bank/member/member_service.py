@@ -1,5 +1,5 @@
-from member_dao import MemberDAO
-from member import Member
+from member.member_dao import MemberDAO
+from member.member import Member
 
 class MemberService:
     def __init__(self, memberDAO):
