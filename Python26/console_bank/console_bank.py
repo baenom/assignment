@@ -19,6 +19,11 @@ class ConsoleBank:
         
         # self.msv.join(Member('Euijin','1234','BaeEuijin'))
         # self.asv.create_account(Account(0,'Euijin',10000,'1234'))
+
+
+# 메인 메뉴 >> 
+
+
     def main(self):
         self.show_welcome()
         while True:
@@ -69,6 +74,12 @@ class ConsoleBank:
             else:
                 print('회원가입에 실패하였습니다')
 
+
+
+# 은행 업무 메뉴 >>
+
+
+
     def run_banking_menu(self):
         print('========은행 업무 메뉴========')
         while True:
@@ -91,46 +102,28 @@ class ConsoleBank:
                     break
             else: print('잘못된 메뉴입니다')
 
+    def menu_list_my_account(self):
+        self.list_member_account(self.msv.current_user)
 
-    def menu_update_password(self):
-        org_password = input('>> 기존 비밀번호 입력 : ')
-        new_password = input('>> 새 비밀번호 입력 : ')
-        
-        self.msv.update_password(self.msv.current_user,org_password, new_password)
+    def menu_deposit(self):
+        print('========입금========')
+        self.list_member_account(self.msv.current_user)
+        account_no = input('>> 계좌번호 : ')
+        if account_no in self.asv.get_all_account():
+            try:
+                amount = int(input('>> 입금액 : '))
+            except ValueError:
+                print('잘못된 금액입니다')
+            else:
+                if amount > 1:
+                    if self.asv.diposit(account_no,amount):
+                        print(f'계좌번호{account_no}에{amount:,}원을 입금했습니다')
+                        balance = self.asv.get_account_balance(account_no)
+                        print(f'잔액{balance:,}')
+                    else:print('입금실패')
+                else: print('0원 이하를 입금할수 없습니다')
+        else: print('없는 계좌번호입니다')
 
-    def menu_delete_membership(self):
-        if self.asv.get_member_account(self.msv.current_user):
-                for i in self.asv.get_member_account(self.msv.current_user):
-                    self.asv.admin_delete_account(i)
-        inspect = self.msv.delete(self.msv.current_user)
-        self.msv.logout()
-        print("회원탈퇴가 완료되었습니다")
-        return inspect
-
-    def menu_view_myinfo(self):
-        return self.run_my_info_menu()
-
-    def run_my_info_menu(self):
-        print('========내 정보 메뉴========')
-        while True:
-            menu = self.select_menu(ConsoleBank.member_myinfo_menu)
-            if menu == 0:
-                break
-            elif menu == 1:
-                self.menu_update_password() 
-            elif menu == 2:
-                return self.menu_delete_membership()
-            else: print('잘못된 메뉴입니다')
-
-    
-    def menu_delete_account(self):
-        account_no = input('>> 삭제할 계좌번호 : ')
-        password = input('>> 삭제할 계좌 비밀번호 : ')
-        self.asv.delete_account(self.msv.current_user,account_no,password)
-
-    def menu_create_account(self):
-        account_password = input('>> 생성할 계좌 비밀번호 : ')
-        self.asv.create_account(Account(0,self.msv.current_user,0,account_password))
     def menu_withdraw(self):
         print('========출금========')
         self.list_member_account(self.msv.current_user)
@@ -151,27 +144,51 @@ class ConsoleBank:
                     else:print('출금 실패')
                 else:print('0원 이하를 입금할수 없습니다')
         else: print('없는 계좌번호입니다')
-    def menu_deposit(self):
-        print('========입금========')
-        self.list_member_account(self.msv.current_user)
-        account_no = input('>> 계좌번호 : ')
-        if account_no in self.asv.get_all_account():
-            try:
-                amount = int(input('>> 입금액 : '))
-            except ValueError:
-                print('잘못된 금액입니다')
-            else:
-                if amount > 1:
-                    if self.asv.diposit(account_no,amount):
-                        print(f'계좌번호{account_no}에{amount:,}원을 입금했습니다')
-                        balance = self.asv.get_account_balance(account_no)
-                        print(f'잔액{balance:,}')
-                    else:print('입금실패')
-                else: print('0원 이하를 입금할수 없습니다')
-        else: print('없는 계좌번호입니다')
 
-    def menu_list_my_account(self):
-        self.list_member_account(self.msv.current_user)
+    def menu_create_account(self):
+        account_password = input('>> 생성할 계좌 비밀번호 : ')
+        self.asv.create_account(Account(0,self.msv.current_user,0,account_password))
+
+    def menu_delete_account(self):
+        account_no = input('>> 삭제할 계좌번호 : ')
+        password = input('>> 삭제할 계좌 비밀번호 : ')
+        self.asv.delete_account(self.msv.current_user,account_no,password)
+
+    def menu_view_myinfo(self):
+        return self.run_my_info_menu()
+    
+
+
+# 내 정보 메뉴 >> 
+
+
+
+    def run_my_info_menu(self):
+        print('========내 정보 메뉴========')
+        while True:
+            menu = self.select_menu(ConsoleBank.member_myinfo_menu)
+            if menu == 0:
+                break
+            elif menu == 1:
+                self.menu_update_password() 
+            elif menu == 2:
+                return self.menu_delete_membership()
+            else: print('잘못된 메뉴입니다')
+
+    def menu_update_password(self):
+        org_password = input('>> 기존 비밀번호 입력 : ')
+        new_password = input('>> 새 비밀번호 입력 : ')
+        
+        self.msv.update_password(self.msv.current_user,org_password, new_password)
+
+    def menu_delete_membership(self):
+        if self.asv.get_member_account(self.msv.current_user):
+                for i in self.asv.get_member_account(self.msv.current_user):
+                    self.asv.admin_delete_account(i)
+        inspect = self.msv.delete(self.msv.current_user)
+        self.msv.logout()
+        print("회원탈퇴가 완료되었습니다")
+        return inspect
 
     def list_member_account(self,id):
         account_list = self.asv.get_member_account(id)
@@ -181,6 +198,14 @@ class ConsoleBank:
                 print(i)
         else: print('등록된 계좌가 없습니다')
         print('------------------------')
+
+
+
+# 관리자 메뉴 >>
+
+
+
+
     def run_admin_menu(self):
         print('========관리자 메뉴========')
         while True:
@@ -195,8 +220,12 @@ class ConsoleBank:
             else: print('잘못된 메뉴입니다')
     def menu_manage_members(self):
         self.run_admin_member_menu()
-    def menu_manage_accounts(self):
-        self.run_admin_account_menu()
+
+
+
+# 회원 관리 메뉴 >>
+
+
 
     def run_admin_member_menu(self):
         print('========회원 관리 메뉴========')
@@ -210,6 +239,26 @@ class ConsoleBank:
             elif menu == 2:
                 self.menu_view_member_info()
             else: print('잘못된 메뉴입니다')
+
+    def menu_list_members(self):
+        if self.msv.list_member():
+            print('가입한 회원이 없습니다')
+
+    def menu_view_member_info(self):
+        user_id = input('>> 조회할 유저 아이디 : ')
+        if self.msv.view_member_info(user_id) == None:
+            print('존재하지 않는 회원입니다')
+
+
+
+# 회원 계좌 관리 메뉴 >>
+
+
+
+
+    def menu_manage_accounts(self):
+        self.run_admin_account_menu()
+
     def run_admin_account_menu(self):
         print('========회원 계좌 관리 메뉴========')
         while True:
@@ -247,15 +296,7 @@ class ConsoleBank:
                     for i in self.asv.get_member_account(user_id):
                         self.asv.admin_delete_account(i)
                 self.msv.delete(user_id)
-    
 
-    def menu_list_members(self):
-        if self.msv.list_member():
-            print('가입한 회원이 없습니다')
-    def menu_view_member_info(self):
-        user_id = input('>> 조회할 유저 아이디 : ')
-        if self.msv.view_member_info(user_id) == None:
-            print('존재하지 않는 회원입니다')
 
 
 
