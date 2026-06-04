@@ -135,30 +135,40 @@ class ConsoleBank:
         print('========출금========')
         self.list_member_account(self.msv.current_user)
         account_no = input('>> 계좌번호 : ')
-        try:
-            amount = int(input('>> 입금액 : '))
-        except ValueError:
-            print('잘못된 금액입니다')
-        else:
-            password = input('>> 비밀번호 : ')
-            if self.asv.withdraw(self.msv.current_user,account_no,amount,password):
-                print(f'계좌번호{account_no}에서{amount:,}원을 출금했습니다')
-                balance = self.asv.get_account_balance(account_no)
-                if balance >= 0:
-                    print(f'잔액{balance:,}')
-            else:print('출금 실패')
+        if account_no in self.asv.get_all_account():
+            try:
+                amount = int(input('>> 입금액 : '))
+            except ValueError:
+                print('잘못된 금액입니다')
+            else:
+                if amount > 1:
+                    password = input('>> 비밀번호 : ')
+                    if self.asv.withdraw(self.msv.current_user,account_no,amount,password):
+                        print(f'계좌번호{account_no}에서{amount:,}원을 출금했습니다')
+                        balance = self.asv.get_account_balance(account_no)
+                        if balance >= 0:
+                            print(f'잔액{balance:,}')
+                    else:print('출금 실패')
+                else:print('0원 이하를 입금할수 없습니다')
+        else: print('없는 계좌번호입니다')
     def menu_deposit(self):
         print('========입금========')
         self.list_member_account(self.msv.current_user)
         account_no = input('>> 계좌번호 : ')
-        amount = int(input('>> 입금액 : '))
-        if amount < 1:
-            if self.asv.diposit(account_no,amount):
-                print(f'계좌번호{account_no}에{amount:,}원을 입금했습니다')
-                balance = self.asv.get_account_balance(account_no)
-                print(f'잔액{balance:,}')
-            else:print('입금실패')
-        else: print('0원 이하를 입금할수 없습니다')
+        if account_no in self.asv.get_all_account():
+            try:
+                amount = int(input('>> 입금액 : '))
+            except ValueError:
+                print('잘못된 금액입니다')
+            else:
+                if amount > 1:
+                    if self.asv.diposit(account_no,amount):
+                        print(f'계좌번호{account_no}에{amount:,}원을 입금했습니다')
+                        balance = self.asv.get_account_balance(account_no)
+                        print(f'잔액{balance:,}')
+                    else:print('입금실패')
+                else: print('0원 이하를 입금할수 없습니다')
+        else: print('없는 계좌번호입니다')
 
     def menu_list_my_account(self):
         self.list_member_account(self.msv.current_user)
