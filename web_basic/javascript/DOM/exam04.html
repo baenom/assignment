@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function(){
+            let btn = document.querySelector('button')
+            btn.addEventListener('click',function(){
+                let pwdTag = document.querySelector('#pwd')
+                pwdTag.style.color = 'orange'
+                pwdTag.style.fontSize = '20pt'
+                pwdTag.style.backgroundColor = 'yellow'
+                pwdTag.style['border-color'] = 'green'
+                pwdTag.style['border-width'] = '3px'
+                pwdTag.style['border-style'] = 'dotted'
+
+                let tdTag = document.getElementById('id')
+                if(tdTag){
+                    tdTag.parentNode.removeChild(tdTag)
+                }
+
+                let h2Tag = document.createElement('h2')
+                h2Tag.innerHTML = 'hello'
+                h2Tag.style.color = 'red'
+                document.body.appendChild(h2Tag)
+            })
+        }
+    </script>
+</head>
+<body>
+    <table border="1" style="width: 150px; height: 150px;">
+        <tr>
+            <td id="id">id</td>
+        </tr>
+        <tr>
+            <td id="pwd">password</td>
+        </tr>
+    </table>
+    <button>click</button>
+</body>
+</html>

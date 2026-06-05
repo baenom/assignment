@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function(num){
+            let btn = document.querySelectorAll('button')
+            let num_list = []
+            let add_number = 0
+            const not_number = ['+','-','/','*']
+            function add_num(num){
+                if(num == 'clear'){
+                    num_list = []
+                    add_number = 0
+                    document.getElementById('num_input').value = add_number
+                }else if(num == '='){
+                    let count = 0
+                    let final_num_list = []
+                    for(let j = 0;j < num_list.length;j++){
+                        if(not_number.includes(num_list[j])){
+                            final_num_list.push(Number(num_list.slice(count,j).join('')))
+                            final_num_list.push(num_list[j])
+                            count = j+1
+                        }
+                    }
+                    final_num_list.push(Number(num_list.slice(count,num_list.length).join('')))
+                    add_number = final_num_list[0];
+                    for(let j = 1;j < final_num_list.length;j+=2){
+                        switch (final_num_list[j]){
+                            case '+':add_number = add_number + final_num_list[j+1] 
+                            break
+                            case '-':add_number = add_number - final_num_list[j+1]
+                            break
+                            case '/':add_number = add_number / final_num_list[j+1]
+                            break
+                            case '*':add_number = add_number * final_num_list[j+1]
+                            break
+                        }
+                    }
+                    document.getElementById('num_input').value = add_number
+                    num_list = []
+                }else{
+                    num_list.push(num)
+                    document.getElementById('num_input').value = num_list.join('')
+                }  
+            }
+            for (let i = 0; i < btn.length; i++) {
+                btn[i].addEventListener('click',function(){
+                    add_num(btn[i].innerText)
+                })
+            }
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="num_input" value="">
+    <table>
+        <tr>
+            <td>
+                <button>
+                    1
+                </button>
+            </td>
+            <td>
+                <button>
+                    2
+                </button>
+            </td>
+            <td>
+                <button>
+                    3
+                </button>
+            </td>
+            <td>
+                <button>
+                    +
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button>
+                    4
+                </button>
+            </td>
+            <td>
+                <button>
+                    5
+                </button>
+            </td>
+            <td>
+                <button>
+                    6
+                </button>
+            </td>
+            <td>
+                <button>
+                    -
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button>
+                    7
+                </button>
+            </td>
+            <td>
+                <button>
+                    8
+                </button>
+            </td>
+            <td>
+                <button>
+                    9
+                </button>
+            </td>
+            <td>
+                <button>
+                    *
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button>
+                    0
+                </button>
+            </td>
+            <td>
+                <button>
+                    clear
+                </button>
+            </td>
+            <td>
+                <button>
+                    =
+                </button>
+            </td>
+            <td>
+                <button>
+                    /
+                </button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

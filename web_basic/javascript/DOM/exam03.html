@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body * {
+            padding: 20px;
+            margin: 20px;
+            border: 5px solid black;
+        }
+        div{
+            border-color: red;
+        }
+        h2{
+            border-color: orange;
+        }
+        span{
+            
+            border-color: blue;
+        }
+    </style>
+
+    <script>
+        window.onload = function(){
+            let divTag = document.querySelector('div')
+            divTag.addEventListener('click',function(){
+                alert('div click....')
+            })
+            let h2Tag = document.querySelector('h2')
+            h2Tag.addEventListener('click',function(event){
+                alert('h2 click....')
+                event.stopPropagation()
+            })
+            let spanTag = document.querySelector('span')
+            spanTag.addEventListener('click',function(event){
+                alert('span click....')
+                event.stopPropagation()
+            })
+
+        }
+    </script>
+</head>
+<body>
+    <div>
+            <h2>
+                <span>
+                    hello
+                </span>
+
+            </h2>
+    </div>
+</body>
+</html>
