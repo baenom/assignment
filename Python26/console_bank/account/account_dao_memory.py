@@ -1,20 +1,20 @@
 from account.account import Account
-import jodlib
+import joblib
 class AccountDAO:
 
-    ACCOUNT_DB_FILE = './db/AccountDB.pkl'
+    ACCOUNT_DB_FILE = 'C:/Users/USER/assignment/Python26/console_bank/db/accountDB.pkl'
     def __init__(self):
-        self.__accountDB = self.__load_accountDB(AccountDAO.ACCOUNT_DB_FILE)
+        self.__accountDB = self.__load_accountDB()
 
     def __load_accountDB(self):
         try:
-            self.__accountDB = jodlib.load(AccountDAO.ACCOUNT_DB_FILE)
+            return joblib.load(AccountDAO.ACCOUNT_DB_FILE)
         except FileNotFoundError:
-            self.__accountDB = {}
+            return {}
 
     def save_accountDB(self):
         if self.__accountDB:
-            jodlib.dump(self.__accountDB,AccountDAO.ACCOUNT_DB_FILE)
+            joblib.dump(self.__accountDB,AccountDAO.ACCOUNT_DB_FILE)
     def update_accountDB(self):
         self.save_accountDB()
         self.__load_accountDB()
@@ -39,7 +39,7 @@ class AccountDAO:
         if len(account_list):return account_list
         return None
     
-    def select_all_account(self,):
+    def select_all_account(self):
         account_list = list(self.__accountDB.values())
         if len(account_list):
             return account_list
@@ -47,7 +47,7 @@ class AccountDAO:
     
     def update_account(self,account_no,account):
         account_no = account.get_account_no()
-        if account_no not in self.__accountDB:
+        if account_no in self.__accountDB:
             self.__accountDB[account_no] = account
             self.update_accountDB()
             return True

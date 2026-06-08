@@ -1,19 +1,19 @@
-import jodlib
+import joblib
 class MemberDAO:
 
-    MEMBER_DB_FILE = './db/memberDB.pkl'
+    MEMBER_DB_FILE = 'C:/Users/USER/assignment/Python26/console_bank/db/memberDB.pkl'
     def __init__(self):
-        self.__memberDB = self.__load_memberDB(MemberDAO.MEMBER_DB_FILE)
+        self.__memberDB = self.__load_memberDB()
 
     def __load_memberDB(self):
         try:
-            self.__memberDB = jodlib.load(MemberDAO.MEMBER_DB_FILE)
+            return joblib.load(MemberDAO.MEMBER_DB_FILE)
         except FileNotFoundError:
-            self.__memberDB = {}
+            return {}
         
     def save_memberDB(self):
         if self.__memberDB:
-            jodlib.dump(self.__memberDB,MemberDAO.MEMBER_DB_FILE)
+            joblib.dump(self.__memberDB,MemberDAO.MEMBER_DB_FILE)
 
     def update_memberDB(self):
         self.save_memberDB()

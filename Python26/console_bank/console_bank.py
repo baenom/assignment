@@ -110,9 +110,15 @@ class ConsoleBank:
 
     def menu_deposit(self):
         print('========입금========')
-        self.list_member_account(self.msv.current_user)
+        
         account_no = input('>> 계좌번호 : ')
-        if account_no in self.asv.get_all_account():
+        sr_account = None
+        for account in self.asv.get_all_account():
+            if account.get_account_no() == account_no:
+                sr_account = account
+                break
+        
+        if sr_account is not None:
             try:
                 amount = int(input('>> 입금액 : '))
             except ValueError:
@@ -129,9 +135,15 @@ class ConsoleBank:
 
     def menu_withdraw(self):
         print('========출금========')
-        self.list_member_account(self.msv.current_user)
+
         account_no = input('>> 계좌번호 : ')
-        if account_no in self.asv.get_all_account():
+        sr_account = None
+        for account in self.asv.get_all_account():
+            if account.get_account_no() == account_no:
+                sr_account = account
+                break
+        
+        if sr_account is not None:
             try:
                 amount = int(input('>> 입금액 : '))
             except ValueError:
@@ -285,20 +297,27 @@ class ConsoleBank:
         if self.asv.get_member_account(user_id) == None:
             print('유저가 없거나 유저의 계좌가 존재하지 않습니다')
         else:
-            self.asv.get_member_account(user_id)
+            user_account_list = self.asv.get_member_account(user_id)
+            for account in user_account_list:
+                ano = account.get_account_no()
+                bal = account.get_balance()
+                print(f"계좌번호: {ano}  |  잔액: {bal:,}원")
             
     def menu_delete_member(self):
         user_id = input('>> 강퇴시킬 유저 아이디 : ')
-        if self.msv.view_member_info == None:
-            print('존재하지 않는 유저입니다')
-        else:
-            if user_id == self.msv.current_user:
-                print('관리자는 탈퇴가 불가능합니다')
+        if not self.asv.get_member_account(user_id):
+            if self.msv.view_member_info == None:
+                print('존재하지 않는 유저입니다')
             else:
-                if self.asv.get_member_account(user_id):
-                    for i in self.asv.get_member_account(user_id):
-                        self.asv.admin_delete_account(i)
-                self.msv.delete(user_id)
+                if user_id == self.msv.current_user:
+                    print('관리자는 탈퇴가 불가능합니다')
+                else:
+                    if self.asv.get_member_account(user_id):
+                        for i in self.asv.get_member_account(user_id):
+                            self.asv.admin_delete_account(i)
+                    self.msv.delete(user_id)
+        else:
+            print('잔액이 남은 유저는 강퇴시킬수 없습니다')
 
 
 
