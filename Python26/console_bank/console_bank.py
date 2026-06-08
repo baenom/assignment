@@ -35,10 +35,13 @@ class ConsoleBank:
                 self.menu_join()
             else: print('잘못된 메뉴입니다')
         self.say_goodbye()
+
     def show_welcome(self):
         print('========안녕하세요 EuijinBae의 은행입니다========')
+
     def say_goodbye(self):
         print('안녕히가세요')
+
     def select_menu(self,menu_list):
         print('------------------------')
         for index in range(1,len(menu_list)):
@@ -50,6 +53,7 @@ class ConsoleBank:
         except ValueError:
             return -1
         else:return num
+
     def menu_login(self):
         print('========로그인========')
         user_id = input('>> 아이디 : ')
@@ -61,6 +65,7 @@ class ConsoleBank:
                 self.run_admin_menu()
             else: self.run_banking_menu()
         else: print('로그인에 실패하였습니다')
+
     def menu_join(self):
         print('========회원가입========')
         user_id = input('>> 아이디 : ')
@@ -75,9 +80,7 @@ class ConsoleBank:
                 print('회원가입에 실패하였습니다')
 
 
-
 # 은행 업무 메뉴 >>
-
 
 
     def run_banking_menu(self):
@@ -158,9 +161,7 @@ class ConsoleBank:
         return self.run_my_info_menu()
     
 
-
 # 내 정보 메뉴 >> 
-
 
 
     def run_my_info_menu(self):
@@ -218,6 +219,7 @@ class ConsoleBank:
             elif menu == 2:
                 self.menu_manage_accounts()
             else: print('잘못된 메뉴입니다')
+
     def menu_manage_members(self):
         self.run_admin_member_menu()
 
@@ -235,7 +237,6 @@ class ConsoleBank:
                 break
             elif menu == 1:
                 self.menu_list_members()
-
             elif menu == 2:
                 self.menu_view_member_info()
             else: print('잘못된 메뉴입니다')
@@ -278,12 +279,14 @@ class ConsoleBank:
             print('유저가 없습니다')
         else:
             self.asv.get_all_account()
+
     def menu_list_member_accounts(self):
         user_id = input('>> 조회할 유저 아이디 : ')
         if self.asv.get_member_account(user_id) == None:
             print('유저가 없거나 유저의 계좌가 존재하지 않습니다')
         else:
             self.asv.get_member_account(user_id)
+            
     def menu_delete_member(self):
         user_id = input('>> 강퇴시킬 유저 아이디 : ')
         if self.msv.view_member_info == None:
