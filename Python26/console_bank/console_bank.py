@@ -1,8 +1,8 @@
 from member.member import Member
-from member.member_dao import MemberDAO
+from member.member_dao_memory import MemberDAO
 from member.member_service import MemberService
 from account.account import Account
-from account.account_dao import AccountDAO
+from account.account_dao_memory import AccountDAO
 from account.account_service import AccountService
 
 class ConsoleBank:

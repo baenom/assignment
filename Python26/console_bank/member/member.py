@@ -1,4 +1,4 @@
-from member.member_dao import MemberDAO
+from member.member_dao_memory import MemberDAO
 
 class Member:
     def __init__(self, id, password, name):

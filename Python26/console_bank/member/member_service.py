@@ -1,4 +1,4 @@
-from member.member_dao import MemberDAO
+from member.member_dao_memory import MemberDAO
 from member.member import Member
 
 class MemberService:
