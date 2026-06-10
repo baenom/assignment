@@ -1,54 +1,32 @@
 from book.book_dao import BookDAO
 from book.book import Book
 
+
 class BookService:
-    def __init__(self, bookDAO):
-        self.ADMIN_ID = 'admin'
-        self.ADMIN_PASSWORD = '1234'
-        self.current_user = None
-        self.__DAO = bookDAO
-        self.join(Book(self.ADMIN_ID, self.ADMIN_PASSWORD, self.ADMIN_ID))
+    book_no_seq = 1
+    def __init__(self,book_dao):
+        self.__dao = book_dao
 
-    def join(self, book):
-        # book.set_id(book.get_id().lower())
-        if not self.is_valid_id(book.get_id()):
-            return False
-        if self.__DAO.is_exist(book.get_id()):
-            return False
-        return self.__DAO.insert_book(book)
+    def admin_create_book(self,book):
 
-    def is_valid_id(self, id):
-        if id.isalpha(): return True
+        book.set_book_no(str(BookService.book_no_seq))
+        BookService.book_no_seq += 1
 
-    def login(self, id, password):
-        book = self.__DAO.get_book_info(id)
-        if book:
-            if password == book.get_password():
-                return id
-        return None
+        return self.__dao.insert_book(book)
 
-    def list_book(self):
-        return self.__DAO.get_all_books()
-
-    def view_book_info(self, id):
-        return self.__DAO.get_book_info(id)
-
-    def update_book_info(self, id, new_title, new_author):
-        return self.__DAO.update_book_info(id, new_title, new_author)
-
-    def delete_book(self, id):
-        if self.current_user == id or self.current_user == self.ADMIN_ID:
-            return self.__DAO.delete_book(id)
-
+    def get_all_books(self):
+        return self.__dao.select_all_books()
     
-if __name__ == '__main__':
-    bs = BookService(BookDAO())
-    bs.join(Book('Euijin','1234','BaeEuijin'))
-    books = bs.list_book()
-    for book in books:
-        print(book)
-    current_user = bs.login('Euijin','1234')
-    print(current_user)
-    bs.login('Euijin','1234')
-    print(current_user)
-
+    def get_book_by_no(self,book_no):
+        return self.__dao.select_book_by_book_no(book_no)
+    
+    def admin_delete_book(self,book_no):
+        book = self.__dao.select_book_by_book_no(book_no)
+        if not book:
+            return False
+        return self.__dao.delete_book(book_no)
+    def admin_update_book_info(self,book_no):
+        book = self.__dao.select_book_by_book_no(book_no)
+        if book:
+            return book
+        return None
