@@ -33,13 +33,13 @@ class BookStore:
 
 
     # def init_dummy_books(self):
-        # self.book_service.insert_book(Book(self.book_id,"파이썬 알고리즘", "홍길동", 25000, 5, "코딩출판"))
-        # self.book_service.insert_book(Book(self.book_id,"자료구조 마스터", "이순신", 30000, 2, "기술과학"))
-        # self.book_service.insert_book(Book(self.book_id,"디자인 패턴 개론", "강감찬", 28000, 10, "한빛미디어"))
+        # self.book_service.insert_book(Book(self.book_id,"파이썬 알고리즘", "홍길동", 25000, 5, "의진 출판"))
+        # self.book_service.insert_book(Book(self.book_id,"자료구조 마스터", "권순범", 30000, 2, "의진 출판"))
+        # self.book_service.insert_book(Book(self.book_id,"잡아스크립트", "배의진", 28000, 10, "의진 출판"))
 
     # def init_dummy_members(self):
-        # self.member_service.join(Member("testuser", "1234", "홍길동", "서울시 강남구"))
-        # self.member_service.join(Member("kim", "1234", "김철수", "부산시 수영구"))
+        # self.member_service.join(Member("testuser", "1234", "홍길동", "서울"))
+        # self.member_service.join(Member("kim", "1234", "김철수", "부산"))
     def show_menu(self,menu_list):
         for menu in menu_list:
             print(menu)

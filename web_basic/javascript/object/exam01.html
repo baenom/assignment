@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        let person = {
+            name: 'ghdrlfehd',
+            age: 25,
+            'phone-office': '000111000',
+            showinfo: function(){
+                document.write(`dlfma:${this.name}skdl:${this.age}<br>`)
+            }
+        }
+        let person2 = new Object()
+        person2.name = "rkdrlfehd"
+        person2.age = 30
+        person2.showinfo = function(){
+            document.write(`dlfma:${this.name}skdl:${this.age}<br>`)
+        }
+        function Person(name,age){
+            this.name = name
+            this.age = age
+            this.showinfo = function(){
+                document.write(`dlfma:${this.name}skdl:${this.age}<br>`)
+            }
+        }
+        let person3 = new Person('rhrkfrehd',39)
+        let person4 = new Person('rhrkfrehd',49)
+
+        person.addr = 'tjdskatl tnwkjdrn'
+        person.showinfo()
+        person2.showinfo()
+        person3.showinfo()
+        person4.showinfo()
+        consol.log(person.name)
+        consol.log(person['phone-office'])
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
