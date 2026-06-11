@@ -20,8 +20,8 @@ class BookStore:
         self.book_service = BookService(BookDAO())
         self.last_book_id_info()
         self.member_service.join(Member(self.member_service.ADMIN_ID, self.member_service.ADMIN_PASSWORD, "관리자", "성남시 수정구"))
-        # self.init_dummy_books()
-        # self.init_dummy_members()
+        # self.init_dummy_books() # 더미데이터에용
+        # self.init_dummy_members() # 이것도 더미데이터에용
         
 
     def last_book_id_info(self):
@@ -40,6 +40,7 @@ class BookStore:
     # def init_dummy_members(self):
         # self.member_service.join(Member("testuser", "1234", "홍길동", "서울"))
         # self.member_service.join(Member("kim", "1234", "김철수", "부산"))
+
     def show_menu(self,menu_list):
         for menu in menu_list:
             print(menu)
