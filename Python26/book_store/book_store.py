@@ -8,6 +8,7 @@ from member.cart import CartItem
 
 class BookStore:
     def __init__(self):
+        self.book_id = 1
         self.book_store_menu = ["0. 종료", "1. 책 목록 보기", "2. 로그인", "3. 회원가입"]
         self.admin_menu_list = ["0. 로그아웃", "1. 회원 목록 조회 및 강퇴", "2. 도서 관리(등록/수정/삭제)"]
         self.admin_member_menu_list = ["0. 돌아가기", "1. 회원 강제 탈퇴(강퇴)"]
@@ -18,22 +19,27 @@ class BookStore:
         self.member_service = MemberService(MemberDAO())
         self.book_service = BookService(BookDAO())
         self.last_book_id_info()
-        self.init_dummy_books()
-        self.init_dummy_members()
+        self.member_service.join(Member(self.member_service.ADMIN_ID, self.member_service.ADMIN_PASSWORD, "관리자", "성남시 수정구"))
+        # self.init_dummy_books()
+        # self.init_dummy_members()
+        
 
     def last_book_id_info(self):
-        for book in self.book_service.get_book_list():
-            book_id = book.get_book_id() 
-        self.book_service.__book_insert_counter = book_id + 1
+        book_list = self.book_service.get_book_list()
+         
+        
+        for book in book_list:
+            self.book_id = int(book.get_book_id())
 
-    def init_dummy_books(self):
-        self.book_service.insert_book(Book(self.book_service.__book_insert_counter,"파이썬 알고리즘", "홍길동", 25000, 5, "코딩출판"))
-        self.book_service.insert_book(Book(self.book_service.__book_insert_counter,"자료구조 마스터", "이순신", 30000, 2, "기술과학"))
-        self.book_service.insert_book(Book(self.book_service.__book_insert_counter,"디자인 패턴 개론", "강감찬", 28000, 10, "한빛미디어"))
 
-    def init_dummy_members(self):
-        self.member_service.join(Member("testuser", "1234", "홍길동", "서울시 강남구"))
-        self.member_service.join(Member("kim", "1234", "김철수", "부산시 수영구"))
+    # def init_dummy_books(self):
+        # self.book_service.insert_book(Book(self.book_id,"파이썬 알고리즘", "홍길동", 25000, 5, "코딩출판"))
+        # self.book_service.insert_book(Book(self.book_id,"자료구조 마스터", "이순신", 30000, 2, "기술과학"))
+        # self.book_service.insert_book(Book(self.book_id,"디자인 패턴 개론", "강감찬", 28000, 10, "한빛미디어"))
+
+    # def init_dummy_members(self):
+        # self.member_service.join(Member("testuser", "1234", "홍길동", "서울시 강남구"))
+        # self.member_service.join(Member("kim", "1234", "김철수", "부산시 수영구"))
     def show_menu(self,menu_list):
         for menu in menu_list:
             print(menu)
@@ -158,7 +164,7 @@ class BookStore:
         price = int(input("가격: "))
         stock = int(input("재고: "))
         publisher = input("출판사: ")
-        if self.book_service.insert_book(Book(self.book_service.__book_insert_counter, title, author, price, stock, publisher)):
+        if self.book_service.insert_book(Book(self.book_id, title, author, price, stock, publisher)):
             print("\n도서 등록 완료")
         else:
             print("\n이미 존재하는 도서입니다")

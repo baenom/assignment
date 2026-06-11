@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        document.addEventListener("DOMContentLoaded",function(){
+            document.addEventListener('click',function(event){
+                if(event.target.tagname == 'BUTTON'){
+                    let id = event.target.tagname.getAttribute("id")
+                    event.target.innerHTML = '<mark>GOOD</mark>'
+                    // let btn = document.querySelector(`#${id}`)
+                    // btn.innerText = '글릭'
+                }
+            })
+            
+        })
+    </script>
+</head>
+<body>
+    
+    <button id="btn01">1</button>
+    <button id="btn02">2</button>
+    <button id="btn03">3</button>
+    <button id="btn04">4</button>
+    <button id="btn05">5</button>
+    
+</body>
+</html>

@@ -7,9 +7,6 @@ class MemberService:
         self.ADMIN_PASSWORD = '1234'
         self.current_user = None  
         self.__DAO = memberDAO
-        
-        if not self.__DAO.is_exist(self.ADMIN_ID):
-            self.__DAO.insert_member(Member(self.ADMIN_ID, self.ADMIN_PASSWORD, "관리자", "본사"))
 
     def join(self, member):
         if not self.is_valid_id(member.get_id()) or self.__DAO.is_exist(member.get_id()):
