@@ -3,30 +3,20 @@ from book.book import Book
 
 
 class BookService:
-    book_no_seq = 1
-    def __init__(self,book_dao):
-        self.__dao = book_dao
+    def __init__(self, bookDAO):
+        self.__DAO = bookDAO
 
-    def admin_create_book(self,book):
+    def insert_book(self, book):
+        return self.__DAO.insert_book(book)
 
-        book.set_book_no(str(BookService.book_no_seq))
-        BookService.book_no_seq += 1
+    def get_book_list(self):
+        return self.__DAO.get_all_books()
 
-        return self.__dao.insert_book(book)
+    def get_book_info(self, book_id):
+        return self.__DAO.get_book_info(book_id)
 
-    def get_all_books(self):
-        return self.__dao.select_all_books()
-    
-    def get_book_by_no(self,book_no):
-        return self.__dao.select_book_by_book_no(book_no)
-    
-    def admin_delete_book(self,book_no):
-        book = self.__dao.select_book_by_book_no(book_no)
-        if not book:
-            return False
-        return self.__dao.delete_book(book_no)
-    def admin_update_book_info(self,book_no):
-        book = self.__dao.select_book_by_book_no(book_no)
-        if book:
-            return book
-        return None
+    def update_book_info(self, book):
+        return self.__DAO.update_book(book)
+
+    def remove_book(self, book_id):
+        return self.__DAO.delete_book(book_id)

@@ -18,47 +18,39 @@ class MemberDAO:
     def update_memberDB(self):
         self.save_memberDB()
         self.__load_memberDB()
+
     def insert_member(self, member):
         if self.is_exist(member.get_id()):
             return False
-        self.__memberDB[member.get_id()] = member
-        self.save_memberDB()
+        self.__member_list.append(member)
         return True
 
     def is_exist(self, id):
-        if id in self.__memberDB.keys() : return True
+        for member in self.__member_list:
+            if member.get_id() == id:
+                return True
         return False
 
     def get_member_info(self, id):
-        if self.is_exist(id):
-            return self.__memberDB[id]
-        else:
-            return None
+        for member in self.__member_list:
+            if member.get_id() == id:
+                return member
+        return None
 
     def get_all_members(self):
-        if self.__memberDB:
-            return list(self.__memberDB.values())
-        return []
-    
-    def update_password(self, id, new_password):
-        member = self.get_member_info(id)
-        if member:
-            member.set_password(new_password)
-            self.save_memberDB()
-            return True
+        return self.__member_list
+
+    def delete_member(self, id):
+        for idx, member in enumerate(self.__member_list):
+            if member.get_id() == id:
+                del self.__member_list[idx]
+                return True
         return False
 
     def update_member_info(self, id, new_name):
         member = self.get_member_info(id)
         if member:
             member.set_name(new_name)
-            self.save_memberDB()
-            return True
-        return False
-
-    def delete_member(self, id):
-        if self.is_exist(id):
-            del self.__memberDB[id]
             self.save_memberDB()
             return True
         return False
