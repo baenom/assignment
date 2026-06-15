@@ -33,8 +33,22 @@ class MemberService:
         member = self.__DAO.get_member_info(id)
         if member:
             member.set_address(new_address)
+            self.save_member_data()
             return True
         return False
 
     def delete_account(self, id):
         return self.__DAO.delete_member(id)
+
+    def save_member_data(self):
+        self.__DAO.save_memberDB()
+
+    def update_password(self, member, org_password, new_password):
+        if member.get_password() == org_password:
+            member._Member__password = new_password
+            self.save_member_data()
+            print("\n비밀번호가 성공적으로 변경되었습니다.")
+            return True
+        else:
+            print("\n기존 비밀번호가 일치하지 않습니다.")
+            return False

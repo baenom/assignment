@@ -1,7 +1,6 @@
 from book.book_dao import BookDAO
 from book.book import Book
 
-
 class BookService:
     def __init__(self, bookDAO):
         self.__DAO = bookDAO

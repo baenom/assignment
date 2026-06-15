@@ -4,7 +4,6 @@ class BookDAO:
     BOOK_DB_FILE = 'C:/Users/USER/assignment/Python26/book_store/db/bookDB.pkl'
 
     def __init__(self):
-        self.__book_insert_counter = 1
         self.__bookDB = self.__load_bookDB()
 
     def __load_bookDB(self):
@@ -19,7 +18,6 @@ class BookDAO:
     def save_bookDB(self):
         if self.__bookDB is None:
             self.__bookDB = {}
-            
         try:
             joblib.dump(self.__bookDB, BookDAO.BOOK_DB_FILE)
         except Exception:
@@ -42,6 +40,7 @@ class BookDAO:
         if not self.__bookDB:
             return []
         return list(self.__bookDB.values())
+
     def get_book_info(self, book_id):
         if not self.__bookDB:
             return None
@@ -52,17 +51,26 @@ class BookDAO:
         except (ValueError, TypeError):
             pass
         return None
+
     def update_book(self, book):
         if not self.__bookDB or not book:
             return False
         book_id = book.get_book_id()
-        target_key = None
         if book_id in self.__bookDB:
-            target_key = book_id
-            
-        if target_key is not None:
-            self.__bookDB[target_key] = book
+            self.__bookDB[book_id] = book
             self.save_bookDB()
             return True
-            
+        return False
+    
+    def delete_book(self, book_id):
+        if not self.__bookDB:
+            return False
+        try:
+            target_id = int(book_id)
+            if target_id in self.__bookDB:
+                del self.__bookDB[target_id]
+                self.save_bookDB()
+                return True
+        except (ValueError, TypeError):
+            pass
         return False
