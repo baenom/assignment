@@ -18,16 +18,6 @@ class TestTaste:
         self.csv = CartService(CartDAO())
         if self.msv.get_members_info(self.msv.ADMIN_ID) is None:
             self.msv.join(Member(self.msv.ADMIN_ID,'관리자',self.msv.ADMIN_PASSWORD,None))
-        # if self.msv.list_member() == []:
-        #     self.msv.join(Member('Euijin','BaeEuijin','1234',[]))
-        # test_test = ['배의진이 가장 좋아하는 음식은?','문어의 다리는 몇개?','1+1=?']
-        # test_answer = ['회','8개','2']
-        # if self.tsv.get_all_test() == []:
-        #     for i in range(3):
-        #             test_list = []
-        #             test_list.append(Test(1,test_test[i],test_answer[i],True,2000))
-        #     if self.tsv.insert_test(test_list):
-        #         print('더미 문제지가 추가되었습니다')
     def start(self):
         while True:
             self.select_menu(self.start_menu)
@@ -140,13 +130,10 @@ class TestTaste:
             return
         try:
             id = int(input('구매할 문제지 id를 입력하세요: '))
-            if hasattr(self.msv.current_user, 'get_id'):
-                user_id = self.msv.current_user.get_id()
-            else:
-                user_id = self.msv.current_user
+            user_id = self.msv.current_user
 
             member_obj = self.msv.get_members_info(user_id)
-            
+
             if member_obj is not None:
                 if self.msv.update_test_id_info(member_obj, id):
                     print('문제를 바로 구매하였습니다')
@@ -177,10 +164,7 @@ class TestTaste:
         cart = input('(y/n)로 구매를 결정해주세요: ')
         
         if cart.lower() == 'y':
-            if hasattr(self.msv.current_user, 'get_id'):
-                user_id = self.msv.current_user.get_id()
-            else:
-                user_id = self.msv.current_user
+            user_id = self.msv.current_user
             
             member_obj = self.msv.get_members_info(user_id)
             
@@ -193,10 +177,7 @@ class TestTaste:
                 print("유저 정보를 데이터베이스에서 찾을 수 없습니다")
 
     def my_test(self):
-        if hasattr(self.msv.current_user, 'get_id'):
-            user_id = self.msv.current_user.get_id()
-        else:
-            user_id = self.msv.current_user
+        user_id = self.msv.current_user
 
         test_ids = self.msv.get_members_test(user_id)
         
@@ -209,10 +190,7 @@ class TestTaste:
         else:
             print("구매한 문제지가 없거나 유저 정보를 찾을 수 없습니다")
     def my_answer(self):
-        if hasattr(self.msv.current_user, 'get_id'):
-            user_id = self.msv.current_user.get_id()
-        else:
-            user_id = self.msv.current_user
+        user_id = self.msv.current_user
 
         test_ids = self.msv.get_members_test(user_id)
         
@@ -245,10 +223,7 @@ class TestTaste:
                     print('잘못된 메뉴입니다')
 
     def delete_me(self):
-        if hasattr(self.msv.current_user, 'get_id'):
-            user_id = self.msv.current_user.get_id()
-        else:
-            user_id = self.msv.current_user
+        user_id = self.msv.current_user
             
         if self.msv.delete_member(user_id):
             print("회원 탈퇴가 성공적으로 완료되었습니다")
@@ -265,10 +240,7 @@ class TestTaste:
         old_password = input('이전 password를 입력하세요: ')
         new_password = input('새로운 password를 입력하세요: ')
         
-        if hasattr(self.msv.current_user, 'get_password'):
-            member_obj = self.msv.current_user
-        else:
-            member_obj = self.msv.get_members_info(self.msv.current_user)
+        member_obj = self.msv.get_members_info(self.msv.current_user)
             
         if member_obj is not None:
             if self.msv.update_password(member_obj, old_password, new_password):
